@@ -18,6 +18,10 @@ const NOT_FOUND_MESSAGE =
 
 const NOT_INITIALIZED_MESSAGE = 'The node is not initialized';
 
+// dummy function for test
+// tslint:disable-next-line: typedef
+export const foo = () => 'bar';
+
 /**
  * Main class for request node express server
  * This class defines routes to handle requests from client
