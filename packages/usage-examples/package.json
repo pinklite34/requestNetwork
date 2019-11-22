@@ -9,7 +9,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/usage-examples"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/usage-examples#readme",
   "bugs": {

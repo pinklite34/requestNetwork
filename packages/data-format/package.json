@@ -12,7 +12,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/data-format"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/data-format",
   "bugs": {

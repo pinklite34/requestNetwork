@@ -9,7 +9,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/toolbox"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/toolbox#readme",
   "bugs": {

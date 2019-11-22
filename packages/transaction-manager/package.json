@@ -11,7 +11,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/transaction-manager"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/transaction#readme",
   "bugs": {

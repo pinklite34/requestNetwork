@@ -11,7 +11,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/multi-format"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/multi-format#readme",
   "bugs": {

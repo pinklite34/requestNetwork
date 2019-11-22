@@ -11,7 +11,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/epk-signature"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/signature-provider#readme",
   "bugs": {

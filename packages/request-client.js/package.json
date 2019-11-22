@@ -11,7 +11,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git",
+    "directory": "packages/request-client.js"
   },
   "homepage": "https://github.com/RequestNetwork/requestNetwork/tree/master/packages/request-client.js#readme",
   "bugs": {
