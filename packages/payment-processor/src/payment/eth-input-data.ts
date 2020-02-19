@@ -2,8 +2,10 @@ import { ContractTransaction, Signer } from 'ethers';
 import { Web3Provider } from 'ethers/providers';
 import { BigNumberish } from 'ethers/utils';
 
+import { ethereumProxyArtifact } from '@requestnetwork/smart-contracts/src/lib';
 import { ClientTypes, PaymentTypes } from '@requestnetwork/types';
 
+import { EthProxyContract } from '../contracts/EthProxyContract';
 import {
   getAmountToPay,
   getProvider,
@@ -35,6 +37,29 @@ export async function payEthInputDataRequest(
     value: amountToPay,
   });
   return tx;
+}
+
+/**
+ * Encodes a call to the Ethereum Proxy Contract, for multisig usage
+ * @param request
+ * @param signerOrProvider
+ */
+export function encodePayEthProxyContractRequest(
+  request: ClientTypes.IRequestData,
+  signerOrProvider: Web3Provider | Signer = getProvider(),
+): string {
+  validateRequest(request, PaymentTypes.PAYMENT_NETWORK_ID.ETH_INPUT_DATA);
+  const signer = getSigner(signerOrProvider);
+  const proxyAddress = ethereumProxyArtifact.getAddress(request.currencyInfo.network!);
+  const ethProxyInterface = EthProxyContract.connect(proxyAddress, signer).interface;
+
+  const { paymentAddress, paymentReference } = getRequestPaymentValues(request);
+
+  const encodedApproveCall = ethProxyInterface.functions.transferWithReference.encode([
+    paymentAddress,
+    `0x${paymentReference}`,
+  ]);
+  return encodedApproveCall;
 }
 
 /**

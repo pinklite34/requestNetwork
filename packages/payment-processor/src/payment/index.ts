@@ -5,9 +5,18 @@ import { bigNumberify, BigNumberish } from 'ethers/utils';
 import { ClientTypes, ExtensionTypes } from '@requestnetwork/types';
 
 import { getBtcPaymentUrl } from './btc-address-based';
-import { _getErc20PaymentUrl, getErc20Balance, payErc20ProxyRequest } from './erc20-proxy';
-import { _getEthPaymentUrl, payEthInputDataRequest } from './eth-input-data';
-import { getNetworkProvider, getProvider, getSigner } from './utils';
+import {
+  _getErc20PaymentUrl,
+  encodePayErc20Request,
+  getErc20Balance,
+  payErc20ProxyRequest,
+} from './erc20-proxy';
+import {
+  _getEthPaymentUrl,
+  encodePayEthProxyContractRequest,
+  payEthInputDataRequest,
+} from './eth-input-data';
+import { getNetworkProvider, getProvider } from './utils';
 
 const getPaymentNetwork = (request: ClientTypes.IRequestData): ExtensionTypes.ID | undefined => {
   // tslint:disable-next-line: typedef
@@ -37,13 +46,35 @@ export async function payRequest(
   signerOrProvider: Web3Provider | Signer = getProvider(),
   amount?: BigNumberish,
 ): Promise<ContractTransaction> {
-  const signer = getSigner(signerOrProvider);
   const paymentNetwork = getPaymentNetwork(request);
   switch (paymentNetwork) {
     case ExtensionTypes.ID.PAYMENT_NETWORK_ERC20_PROXY_CONTRACT:
-      return payErc20ProxyRequest(request, signer, amount);
+      return payErc20ProxyRequest(request, signerOrProvider, amount);
     case ExtensionTypes.ID.PAYMENT_NETWORK_ETH_INPUT_DATA:
-      return payEthInputDataRequest(request, signer, amount);
+      return payEthInputDataRequest(request, signerOrProvider, amount);
+    default:
+      throw new UnsupportedNetworkError(paymentNetwork);
+  }
+}
+
+/**
+ * Encodes the call to pay a request, if
+ * Supported networks: ERC20_PROXY_CONTRACT, ETH_INPUT_DATA
+ * @param request
+ * @param signerOrProvider
+ * @param amount
+ */
+export function encodePayRequest(
+  request: ClientTypes.IRequestData,
+  signerOrProvider: Web3Provider | Signer = getProvider(),
+  amount?: BigNumberish,
+): string {
+  const paymentNetwork = getPaymentNetwork(request);
+  switch (paymentNetwork) {
+    case ExtensionTypes.ID.PAYMENT_NETWORK_ERC20_PROXY_CONTRACT:
+      return encodePayErc20Request(request, signerOrProvider, amount);
+    case ExtensionTypes.ID.PAYMENT_NETWORK_ETH_INPUT_DATA:
+      return encodePayEthProxyContractRequest(request, signerOrProvider);
     default:
       throw new UnsupportedNetworkError(paymentNetwork);
   }
